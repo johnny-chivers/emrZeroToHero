@@ -1,0 +1,32 @@
+{
+    "clusterId": "<CLUSTER_ID>",
+    "sparkArgs": [
+        "spark-submit",
+        "s3://<S3_BUCKET_NAME>/files/spark-etl.py",
+        "s3://<S3_BUCKET_NAME>/input",
+        "s3://<S3_BUCKET_NAME>/output"
+    ],
+    "hiveArgs": [
+        "hive-script",
+        "--run-hive-script",
+        "--args",
+        "-f",
+        "s3://<S3_BUCKET_NAME>/files/ny-taxi.hql",
+        "-d",
+        "INPUT=s3://<S3_BUCKET_NAME>/input/",
+        "-d",
+        "OUTPUT=s3://<S3_BUCKET_NAME>/output/hive"
+    ],
+    "pigArgs": [
+        "pig-script",
+        "--run-pig-script",
+        "--args",
+        "-f",
+        "s3://<S3_BUCKET_NAME>/files/ny-taxi.pig",
+        "-p",
+        "INPUT=s3://<S3_BUCKET_NAME>/input/",
+        "-p",
+        "OUTPUT=s3://<S3_BUCKET_NAME>/output/pig"
+    ],
+    "deleteCluster": false
+}
